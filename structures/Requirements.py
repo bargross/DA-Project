@@ -1,6 +1,8 @@
+from  pandas import read_csv
 from Input import Input
+# import sys
 
-class Requirements():
+class Gatherer():
     def __init__(self):
         self.__info_gatherer = Input()
         
@@ -26,4 +28,4 @@ class Requirements():
     def set_plot_title(self):
         self.title = self.__info_gatherer.get_plot_title()
     def set_data(self):
-        self.data = pd.read_csv(self.__file_path)
+        self.data = read_csv(self.__file_path)

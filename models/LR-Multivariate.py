@@ -1,14 +1,14 @@
 import pandas as pd  
 import numpy as np  
 import matplotlib.pyplot as plt
+from structures.Requirements import Gatherer
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression  
-from Requirements import Requirements
+from sklearn.linear_model import LinearRegression
 # %matplotlib inline
 
 class MLR():
     def __init__(self):
-        self.info = Requirements()
+        self.info = Gatherer()
 
         # regressor
         self.regressor = LinearRegression()
@@ -44,7 +44,7 @@ class MLR():
         self.info.data.describe()
 
     # plots the dataset 
-    def plot(self, x_label="#", y_label="#"):
+    def plot(self, x_label="# of x", y_label="# of y"):
         #
         xlabel = self.info.xLabel
         ylabel = self.info.yLabel
