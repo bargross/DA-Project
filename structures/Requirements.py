@@ -1,3 +1,6 @@
+# Qmul Data Analytics Module Coursework
+# By Leo Mengesha
+
 from  pandas import read_csv
 from Input import Input
 # import sys

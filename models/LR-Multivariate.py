@@ -1,10 +1,15 @@
+# ML Multivariate Linear Regression
+# For Data Analytics
+# Qmul Data Analytics Module Coursework
+# By Leo Mengesha
+
 import pandas as pd  
 import numpy as np  
 import matplotlib.pyplot as plt
+
 from structures.Requirements import Gatherer
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-# %matplotlib inline
 
 class MLR():
     def __init__(self):
@@ -39,7 +44,7 @@ class MLR():
         self.info.set_x_label()
         self.info.set_y_label()
 
-    # optional, it displays statistics of the dataset
+    # optional, it displays the statistics of the dataset
     def show_stat_details(self):
         self.info.data.describe()
 
@@ -58,7 +63,7 @@ class MLR():
         plt.ylabel(y_label)
         plt.show()
     
-    # applies cross-validation sampling only for now
+    # applies cross-validation sampling only (for now)
     def apply_cross_val(self, test_total_size=0.2, random_state=0):
         x = self.x_dim
         y = self.y_dim

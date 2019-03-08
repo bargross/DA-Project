@@ -1,3 +1,6 @@
+# Qmul Data Analytics Module Coursework
+# By Leo Mengesha
+
 class Input:
     #
     def get_file_path(self):
