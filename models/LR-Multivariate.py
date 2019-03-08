@@ -76,8 +76,8 @@ class MLR():
         self.predictions = self.regressor.predict(self.x_test)
         return self.predictions
 
-    def actual_vs_prediction(self, predict=False):
-        if predict:
+    def actual_vs_prediction(self, predict_again=False):
+        if predict_again:
             self.get_predictions()
 
         if self.predictions != None: 
