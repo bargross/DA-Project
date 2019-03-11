@@ -11,7 +11,6 @@ import plotly
 # ML libraries
 import numpy as np
 from sklearn.cluster import MeanShift, estimate_bandwidth
-from sklearn.datasets.samples_generator import make_blobs
 
 # Gatherer found in structures folder
 from structures.MeanShift-Gatherer import KMM_Gatherer
