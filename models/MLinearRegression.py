@@ -52,8 +52,8 @@ class MLR():
         self.isFit = False
         
         #
-        self.x_dim = self.info.data.iloc[:, ].values
-        self.y_dim = self.info.data.iloc[:, ].values
+        self.x_dim = self.info.data.iloc[:,:1].values
+        self.y_dim = self.info.data.iloc[:,:1].values
 
         # get the labels for Multivariate LR and the plot title
         self.info.set_plot_title(info['title'])
@@ -71,26 +71,26 @@ class MLR():
     # plots the dataset 
     def plot(self, x_label="# of x", y_label="# of y"):
         #
-        fig,ax = plt.subplots()
+        # fig,ax = plt.subplots()
 
         #
-        ax.scatter(self.x_train, self.predictions)
-        ax.plot([self.x_train.min(), self.x_train.max()], [self.x_train.min(), self.x_train.max()], 'k--', lw=4)
+        plt.scatter(self.x_train, self.predictions)
+        plt.plot([self.x_train.min(), self.x_train.max()], [self.x_train.min(), self.x_train.max()], 'k--', lw=4)
         
         #
         if x_label != "" and y_label != "":
-            ax.set_xlabel(x_label)
-            ax.set_ylabel(y_label)
+            plt.set_xlabel(x_label)
+            plt.set_ylabel(y_label)
             # ax.set_plot(x=x_label, y=y_label, style='o')
         else:
-            ax.set_xlabel(self.info.xLabel)
-            ax.set_ylabel(self.info.yLabel)
+            plt.set_xlabel(self.info.xLabel)
+            plt.set_ylabel(self.info.yLabel)
             #self.info.data.plot(x=self.info.xLabel, y=self.info.yLabel, style='o')
         #
-        fig.show()
+        plt.show()
     
     # applies cross-validation sampling only (for now)
-    def apply_cross_val(self, test_total_size=0.25, random_state=1):
+    def apply_cross_val(self, test_total_size=0, random_state=0):
         x = self.x_dim
         y = self.y_dim
         self.x_train, self.x_test, self.y_train, self.y_test = train_test_split(x, y, test_size=test_total_size, random_state=random_state)
@@ -115,6 +115,7 @@ class MLR():
     
     def get_regression_coef(self):
         if self.isFit:
+            print(self.x_train)
             for coeff, col_name in  enumerate(self.x_train.columns):
                     print("The coefficient for {} is {}".format(col_name, self.regressor.coef_[0][coeff]))
             # return self.regressor.coef_
