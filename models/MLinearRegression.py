@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 # targetted imports
 from pandas import DataFrame
 from json import loads
-from numpy import r_
+from numpy import r_, array
 from structures.Info import Gatherer
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
@@ -48,13 +48,16 @@ class MLR():
         # get the file path & data 
         self.info.set_file_path(info['path'])
         self.info.set_data()
+        self.info.data = DataFrame(self.info.data, columns=['Central and Eastern','Northern','Southern','Western'])
 
         #
         self.isFit = False
         
         #
-        self.x_dim = self.info.data.iloc[info['cutoff']:, :1].values
-        self.y_dim = self.info.data.iloc[info['cutoff']:, :1].values
+        self.x_dim = self.info.data.iloc[info['from_cell']:, :1].values
+        self.y_dim = self.info.data.iloc[info['from_cell']:, :1].values
+
+        print(self.x_dim)
 
         # get the labels for Multivariate LR and the plot title
         self.info.set_plot_title(info['title'])
@@ -69,26 +72,23 @@ class MLR():
     def add_data_path(self, path=""):
         self.info.set_file_path(path)
 
-    def reset_data(self):
-        new_data = [
-            self.info.data['Central and Eastern'], 
-            self.info.data['Northern'],	
-            self.info.data['Southern'],
-            self.info.data['Western']
-        ]
-        self.info.data = DataFrame(data=new_data)
+    # def reset_data(self):
+    #     new_data = [
+    #         self.info.data['Central and Eastern'], 
+    #         self.info.data['Northern'],	
+    #         self.info.data['Southern'],
+    #         self.info.data['Western']
+    #     ]
+    #     self.info.data = DataFrame(data=new_data)
 
-    def column_to_int(self, column_name=""):
-            if column_name=='Central and Eastern':
-                return 0 
-            elif column_name=='Northern':
-                return 1	
-            elif column_name=='Southern':
-                return 2
-            elif column_name=='Western':
-                return 3
-            else:
-                return None
+    # def column_to_int(self, column_name=""):
+    #         return {
+    #             'Central and Eastern': 0, 
+    #             'Northern': 1,
+    #             'Southern': 2,
+    #             'Western': 3
+    #         }[column_name]
+ 
 
     # plots the dataset 
     def plot(self, x_label="", y_label="", plot_type="bar", column=""):
@@ -100,8 +100,10 @@ class MLR():
             plt.ylabel(self.info.yLabel)
         
         if plot_type == 'bar':
-            plt.bar(self.x_train[self.column_to_int(column)], self.predictions[column], color='blue', align='center')
-            plt.plot([self.x_train.min(), self.x_train.max()], [self.x_train.min(), self.x_train.max()])
+            # column_index = self.column_to_int(column)
+            # print(self.predictions.__sizeof__())
+            plt.bar(self.x_dim, self.predictions, color='blue', align='center')
+            plt.plot(self.predictions)#[self.x_train.min(), self.x_train.max()], [self.x_train.min(), self.x_train.max()])
             plt.title(self.info.title, loc='center')
             plt.show()
 
