@@ -3,8 +3,6 @@
 
 from pandas import read_csv
 from .Input import Input
-from pandas import DataFrame
-# import sys
 
 class Gatherer():
     def __init__(self):
@@ -17,14 +15,14 @@ class Gatherer():
         self.__file = None 
 
         # chosen x and y label for multivariate linear regression
-        self.xLabels = None
-        self.yLabels = None
+        self.xLabel = None
+        self.yLabel = None
 
         # plot title
         self.title = None
 
-    def set_file(self, new_file=""):
-        self.file = new_file
+    def set_file_path(self, new_file=""):
+        self.__file = new_file
 
     def set_x_label(self, xlabel=""):
         if xlabel != "":
@@ -46,6 +44,9 @@ class Gatherer():
  
     def set_data(self):
         self.data  = read_csv(self.__file, sep=',')
+
+        # print(self.data)
+
 
     # def __get_index(self, values, name):
     #     for index, value in enumerate(values):
