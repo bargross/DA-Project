@@ -135,9 +135,10 @@ class MLR():
         else:
             return result
     
-    def score(self):
-        if self.isCrossValidated:
+    
+    # def score(self):
+    #     if self.isCrossValidated:
             # self.train_score = r2_score(self.x_train_cp, self.y_train)
-            self.test_score = r2_score(self.x_test_cp, self.predictions)
+            # self.test_score = r2_score(self.x_test_cp, self.predictions)
         
             

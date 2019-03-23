@@ -17,7 +17,7 @@ info = {
 }
 
 # Variables
-sample_split = 0.25 # sampling split -> 25% Test | 75% train
+sample_split = 1/3 # sampling split -> 25% Test | 75% train
 split_random_state = 0
 
 # create the MLR object
@@ -41,4 +41,4 @@ multivariate_analysis.predict()
 multivariate_analysis.get_summary(summary_type=4)
 
 #
-multivariate_analysis.score()
+# multivariate_analysis.score()
