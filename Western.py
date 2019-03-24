@@ -7,7 +7,7 @@ from json import dumps
 from regression.MLinearRegression import MLR
 
 info = {
-    'title': 'Multivariate Analysis of Western Europe', 
+    'title': '', 
     'file': 'data/Western.csv',
     'target': 'Life Expectancy',
     'attributes': ['Income', 'Education']

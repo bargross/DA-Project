@@ -8,7 +8,7 @@ from regression.MLinearRegression import MLR
 
 # config parameters, {- change title -}
 info = {
-    'title': 'Multivariate Analysis of Northern Europe', 
+    'title': '', 
     'file': 'data/Northern.csv',
     'target': 'Life Expectancy',
     'attributes': ['Income', 'Education']
