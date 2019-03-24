@@ -109,19 +109,19 @@ class MLR():
     def predict(self):
         if self.isFit:
             if self.isCrossValidated:
-                x = self.x_test_const
+                x_dimensional_data = self.x_test_const
                 if self.applied_x_column != None:
-                    x = self.x_test[[self.applied_x_column]]
+                    x_dimensional_data = self.x_test[[self.applied_x_column]]
                 
-                self.predictions = self.regressor.predict(x)
+                self.predictions = self.regressor.predict(x_dimensional_data)
                 self.predicted = True
                 # self.test_score = self.model.score(self.y_test, self.x_test)
             else:
-                x = self.x_dim
+                x_dimensional_data = self.x_dim
                 if self.applied_x_column != None:
-                    x = x[[self.applied_x_column]]
+                    x_dimensional_data = x_dimensional_data[[self.applied_x_column]]
 
-                self.predictions = self.regressor.predict(x)
+                self.predictions = self.regressor.predict(x_dimensional_data)
                 self.predicted = True
                 # self.test_score = self.model.score(self.y_test, sm.add_constant(self.x_dim))
         else:
