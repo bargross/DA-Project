@@ -31,7 +31,7 @@ multivariate_analysis = MLR(dumps(info))
 multivariate_analysis.apply_cross_val(sample_split, split_random_state)
 
 # fit the data
-multivariate_analysis.fit()
+multivariate_analysis.fit(apply_column='Income')
 
 # predictions
 multivariate_analysis.predict()

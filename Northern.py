@@ -8,7 +8,7 @@ from regression.MLinearRegression import MLR
 
 # config parameters, {- change title -}
 info = {
-    'title': '', 
+    'title': ' ', 
     'file': 'data/Northern.csv',
     'target': 'Life Expectancy',
     'attributes': ['Income', 'Education']
@@ -27,10 +27,10 @@ multivariate_analysis = MLR(dumps(info))
 # multivariate_analysis.get_summary(summary_type=0)
 
 # apply the sampling technique
-multivariate_analysis.apply_cross_val(sample_split, split_random_state)
+# multivariate_analysis.apply_cross_val(sample_split, split_random_state)
 
 # fit the data
-multivariate_analysis.fit()
+multivariate_analysis.fit(apply_column='Income')
 
 # predictions
 multivariate_analysis.predict()

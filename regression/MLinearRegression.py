@@ -61,14 +61,13 @@ class MLR():
         #
         self.x_dim = self.info.data[info['attributes']]
         self.y_dim = self.info.data[info['target']]
-        
-        # metrics
-        # self.metrics = None
                             
         # get the labels for Multivariate LR and the plot title
         self.info.set_plot_title(info['title'])
         self.info.set_x_label(info['attributes'][0])
         self.info.set_y_label(info['attributes'][1])
+
+        self.applied_x_column = None
 
          
     def add_file(self, path=""):
@@ -79,22 +78,30 @@ class MLR():
         self.x_train, self.x_test, self.y_train, self.y_test = train_test_split(self.x_dim, self.y_dim, test_size=test_total_size, random_state=random_state, shuffle=False)
         self.isCrossValidated = True
 
-        # copies
-        self.x_train_cp = self.x_train
-        self.x_test_cp = self.x_test
-
         # ols const version
-        self.x_train = sm.add_constant(self.x_train)
-        self.x_test = sm.add_constant(self.x_test)
+        self.x_train_const = sm.add_constant(self.x_train)
+        self.x_test_const = sm.add_constant(self.x_test)
 
-    def fit(self):
+    def fit(self, apply_column=''):
             if self.isCrossValidated:
-                self.model = sm.OLS(self.y_train, self.x_train)
-                self.regressor = self.model.fit()
+                if apply_column != '':
+                    self.applied_x_column = apply_column
+                    self.model = sm.OLS(self.y_train, self.x_train[[apply_column]])
+                    self.regressor = self.model.fit()
+                else:
+                    self.model = sm.OLS(self.y_train, self.x_train_const)
+                    self.regressor = self.model.fit()
+                
                 self.isFit = True
             else:
-                self.model = sm.OLS(self.y_dim, sm.add_constant(self.x_dim))
-                self.regressor = self.model.fit()
+                if apply_column != '':
+                    self.applied_x_column = apply_column
+                    self.model = sm.OLS(self.y_dim, self.x_dim[[apply_column]])
+                    self.regressor = self.model.fit()
+                else:
+                    self.model = sm.OLS(self.y_dim, sm.add_constant(self.x_dim[[apply_column]]))
+                    self.regressor = self.model.fit()
+                
                 self.isFit = True
 
         
@@ -102,11 +109,19 @@ class MLR():
     def predict(self):
         if self.isFit:
             if self.isCrossValidated:
-                self.predictions = self.regressor.predict(self.x_test)
+                x = self.x_test_const
+                if self.applied_x_column != None:
+                    x = self.x_test[[self.applied_x_column]]
+                
+                self.predictions = self.regressor.predict(x)
                 self.predicted = True
                 # self.test_score = self.model.score(self.y_test, self.x_test)
             else:
-                self.predictions = self.regressor.predict(self.x_dim)
+                x = self.x_dim
+                if self.applied_x_column != None:
+                    x = x[[self.applied_x_column]]
+
+                self.predictions = self.regressor.predict(x)
                 self.predicted = True
                 # self.test_score = self.model.score(self.y_test, sm.add_constant(self.x_dim))
         else:
