@@ -34,5 +34,12 @@ multivariate_analysis.fit()
 # predictions
 multivariate_analysis.predict()
 
-#
-multivariate_analysis.get_summary(summary_type=4)
+# for univariate LR tests
+# column = 'Income'
+# column = 'Education'
+
+# for univariate linear regression
+# multivariate_analysis.fit(x_column_name=column)
+
+# oututs a summary of the model in the cmd/terminal/etc...
+multivariate_analysis.get_summary(summary_type=3)

@@ -30,10 +30,17 @@ multivariate_analysis = MLR(dumps(info))
 # multivariate_analysis.apply_cross_val(sample_split, split_random_state)
 
 # fit the data
-multivariate_analysis.fit(apply_column='Income')
+multivariate_analysis.fit()
+
+# for univariate LR tests
+# column = 'Income'
+# column = 'Education'
+
+# for univariate linear regression
+# multivariate_analysis.fit(x_column_name=column)
 
 # predictions
 multivariate_analysis.predict()
 
-#
-multivariate_analysis.get_summary(summary_type=4)
+# oututs a summary of the model in the cmd/terminal/etc...
+multivariate_analysis.get_summary(summary_type=3)
