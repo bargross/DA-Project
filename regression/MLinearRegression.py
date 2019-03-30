@@ -61,9 +61,9 @@ class MLR():
                             
         # get the labels for Multivariate LR and the plot title
         # plot mechanism will be added in the future
-        self.info.set_plot_title(info['title'])      # sets the plot title for any generated plot 
-        self.info.set_x_label(info['attributes'][0]) # sets the x label for a plot
-        self.info.set_y_label(info['attributes'][1]) # sets the y label for a plot
+        # self.info.set_plot_title(info['title'])      # sets the plot title for any generated plot 
+        # self.info.set_x_label(info['attributes'][0]) # sets the x label for a plot
+        # self.info.set_y_label(info['attributes'][1]) # sets the y label for a plot
 
         # column applied for one to one relationship between the target and predictor (i.e.: this column)
         self.applied_x_column = None
