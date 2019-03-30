@@ -4,7 +4,7 @@ Created on Tue Mar 12 23:14:20 2019
 @author: leo
 """
 from json import dumps
-from regression.MLinearRegression import MLR
+from regression_objects.MLinearRegression import MLR
 
 # config parameters, {- change title -}
 info = {
@@ -15,7 +15,6 @@ info = {
 }
 
 # Variables
-sample_split = 1/3 # sampling split -> 30% Test | 70% train
 split_random_state = 0
 
 # create the MLR object

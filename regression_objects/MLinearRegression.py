@@ -11,8 +11,7 @@ import statsmodels.api as sm
 
 # targetted imports
 from json import loads
-from structures.Info import Gatherer
-# from sklearn.model_selection import train_test_split
+from objects.Info import Gatherer
 from sklearn.metrics import r2_score
 from .ModelScore import Metrics
 from sklearn.model_selection import KFold

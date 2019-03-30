@@ -5,7 +5,7 @@ Created on Tue Mar 12 23:14:20 2019
 """
 
 from json import dumps
-from regression.MLinearRegression import MLR
+from regression_objects.MLinearRegression import MLR
 
 
 info = {
