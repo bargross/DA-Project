@@ -11,14 +11,11 @@ import statsmodels.api as sm
 
 # targetted imports
 from json import loads
-# from pandas import DataFrame
-# from numpy import array2string
 from structures.Info import Gatherer
-# from mpl_toolkits.mplot3d import Axes3D
-# from sklearn.metrics import classification_report
-from sklearn.model_selection import train_test_split
+# from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
-# from sklearn.linear_model import LinearRegression
+from .ModelScore import Metrics
+from sklearn.model_selection import KFold
 
 class MLR():
     def __init__(self, info="{'title': '','x': '', 'y': '', 'file': ''}"):
@@ -70,7 +67,7 @@ class MLR():
 
         # column applied for one to one relationship between the target and predictor (i.e.: this column)
         self.applied_x_column = None
-
+        
     """
     Parameters: string
     Description: sets the file new file path and fetches/sets new data 
@@ -80,8 +77,11 @@ class MLR():
         self.info.set_data()
     
     # applies cross-validation sampling only (for now)
-    def apply_cross_val(self, test_total_size=0, random_state=0):
-        self.x_train, self.x_test, self.y_train, self.y_test = train_test_split(self.x_dim, self.y_dim, test_size=test_total_size, random_state=random_state, shuffle=False)
+    def kfold(self, n_split=2, random_state=0):
+        kfold = KFold(n_splits=n_split, random_state=random_state)
+        for train_index, test_index in kfold.split(X=self.x_dim.values, y=self.y_dim.values):
+            self.x_train, self.x_test = self.x_dim.values[train_index], self.x_dim.values[test_index]
+            self.y_train, self.y_test = self.y_dim.values[train_index], self.y_dim.values[test_index]
         self.isCrossValidated = True
 
         # ols const version
@@ -112,7 +112,7 @@ class MLR():
                     self.model = sm.OLS(self.y_dim, self.x_dim[[x_column_name]])
                     self.regressor = self.model.fit()
                 else:
-                    self.model = sm.OLS(self.y_dim, sm.add_constant(self.x_dim[[x_column_name]]))
+                    self.model = sm.OLS(self.y_dim, sm.add_constant(self.x_dim))
                     self.regressor = self.model.fit()
                 
                 self.isFit = True
@@ -130,15 +130,13 @@ class MLR():
                 
                 self.predictions = self.regressor.predict(x_dimensional_data)
                 self.predicted = True
-                # self.test_score = self.model.score(self.y_test, self.x_test)
             else:
                 x_dimensional_data = self.x_dim
                 if self.applied_x_column != None:
                     x_dimensional_data = x_dimensional_data[[self.applied_x_column]]
-
-                self.predictions = self.regressor.predict(x_dimensional_data)
+                
+                self.predictions = self.regressor.predict(sm.add_constant(x_dimensional_data))
                 self.predicted = True
-                # self.test_score = self.model.score(self.y_test, sm.add_constant(self.x_dim))
         else:
             self.fit()
             self.predict()
@@ -170,9 +168,12 @@ class MLR():
             return result
     
     
-    # def score(self):
-    #     if self.isCrossValidated:
-            # self.train_score = r2_score(self.x_train_cp, self.y_train)
-            # self.test_score = r2_score(self.x_test_cp, self.predictions)
+    def get_score(self):
+        if self.isCrossValidated:
+            metrics = Metrics(x=self.x_train, y=self.y_train, x_test=self.x_test, y_test=self.y_test)
+            return metrics.model_score
+        else:
+            return Metrics(self.x_dim, self.y_dim).model_score  
+            
         
             

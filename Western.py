@@ -14,7 +14,7 @@ info = {
 }
 
 # Variables
-sample_split = 0.25 # sampling split -> 25% Test | 75% train
+sample_split = 1/3 # sampling split -> 30% Test | 70% train
 split_random_state = 0
 
 # create the MLR object
@@ -26,7 +26,7 @@ multivariate_analysis = MLR(dumps(info))
 # multivariate_analysis.get_summary(summary_type=0)
 
 # apply the sampling technique
-multivariate_analysis.apply_cross_val(sample_split, split_random_state)
+multivariate_analysis.kfold()
 
 # fit the data
 multivariate_analysis.fit()
@@ -43,3 +43,6 @@ multivariate_analysis.predict()
 
 # oututs a summary of the model in the cmd/terminal/etc...
 multivariate_analysis.get_summary(summary_type=3)
+
+# Score the model - train and test both
+print("Score: ", multivariate_analysis.get_score())
