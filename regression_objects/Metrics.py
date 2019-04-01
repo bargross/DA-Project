@@ -3,7 +3,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 
 # 
-class Metrics():
+class Score():
     def __init__(self, x=[], y=[], x_test=[], y_test=[]):
         self.regressor = LinearRegression()
         self.regressor.fit(x, y)
