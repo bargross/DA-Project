@@ -13,7 +13,7 @@ import statsmodels.api as sm
 from json import loads
 from objects.Info import Gatherer
 from sklearn.metrics import r2_score
-from .ModelScore import Metrics
+from .Metrics import Score
 from sklearn.model_selection import KFold
 
 class MLR():
