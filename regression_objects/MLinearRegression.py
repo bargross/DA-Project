@@ -169,10 +169,10 @@ class MLR():
     
     def get_score(self):
         if self.isCrossValidated:
-            metrics = Metrics(x=self.x_train, y=self.y_train, x_test=self.x_test, y_test=self.y_test)
+            metrics = Score(x=self.x_train, y=self.y_train, x_test=self.x_test, y_test=self.y_test)
             return metrics.model_score
         else:
-            return Metrics(self.x_dim, self.y_dim).model_score  
+            return Score(self.x_dim, self.y_dim).model_score  
             
         
             
