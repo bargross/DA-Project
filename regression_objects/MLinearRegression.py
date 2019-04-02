@@ -99,20 +99,19 @@ class MLR():
                 if x_column_name != '':
                     self.applied_x_column = x_column_name
                     self.model = sm.OLS(self.y_train, self.x_train[[x_column_name]])
-                    self.regressor = self.model.fit()
                 else:
                     self.model = sm.OLS(self.y_train, self.x_train_const)
-                    self.regressor = self.model.fit()
                 
+                self.regressor = self.model.fit()
                 self.isFit = True
             else:
                 if x_column_name != '':
                     self.applied_x_column = x_column_name
                     self.model = sm.OLS(self.y_dim, self.x_dim[[x_column_name]])
-                    self.regressor = self.model.fit()
                 else:
                     self.model = sm.OLS(self.y_dim, sm.add_constant(self.x_dim))
-                    self.regressor = self.model.fit()
+                
+                self.regressor = self.model.fit()
                 
                 self.isFit = True
     
