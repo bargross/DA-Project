@@ -14,7 +14,7 @@ info = {
 }
 
 # Variables
-sample_split = 1/3 # sampling split -> 30% Test | 70% train
+# sample_split = 1/3 # sampling split -> 30% Test | 70% train
 split_random_state = 0
 
 # create the MLR object
