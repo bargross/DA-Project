@@ -117,7 +117,7 @@ class MLR():
     
     """
     Parameters:  Void
-    Description: runs predictions of the get the best fit regression line for the data in question 
+    Description: runs predictions, i.e.: gets the best fit regression line for the data in question 
     """
     def predict(self):
         if self.isFit:
