@@ -24,7 +24,7 @@ class MLR():
         # info gatherer, i.e.: file path, data
         self.info = Gatherer()
 
-        # train data to trian the ML model
+        # train data to train the ML model
         self.x_train = None
         self.y_train = None
         
@@ -33,8 +33,8 @@ class MLR():
         self.y_test = None
 
         # scores
-        self.train_score = None
-        self.test_score = None
+        # self.train_score = None
+        # self.test_score = None
         
         #
         self.predictions = None
