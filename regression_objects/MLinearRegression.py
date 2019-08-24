@@ -1,7 +1,5 @@
 """
 Created on Mon Mar 11 19:29:35 2019
-@Module: Data Analytics
-@Type  : Coursework
 @author: leo
 """
 
