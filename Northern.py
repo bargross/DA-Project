@@ -1,7 +1,7 @@
 """
 Created on Tue Mar 12 23:14:20 2019
 
-@author: leo
+@author: barggros
 """
 from json import dumps
 from regression_objects.MLinearRegression import MLR
